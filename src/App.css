@@ -1,0 +1,69 @@
+.container {
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 50px;
+}
+
+.wheel-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 30px;
+}
+
+/* 上の矢印 */
+.pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: #333;
+  z-index: 10;
+}
+
+/* 円盤 */
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #333;
+  position: relative;
+  /* 文字などを配置しやすくするため */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 円の中の数字 */
+.wheel-number {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  /* 文字の向きを中心に合わせるおまじない */
+  height: 50%; /* 半径分の高さ */
+  transform-origin: bottom center; /* 下（円の中心）を基準に回転 */
+  top: 0;
+}
+
+.spin-btn {
+  padding: 15px 50px;
+  font-size: 1.5rem;
+  background-color: #333;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.spin-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.result {
+  font-size: 3rem;
+  color: #e74c3c;
+  margin-top: 20px;
+}
