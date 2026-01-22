@@ -7,13 +7,29 @@ function App() {
   const [result, setResult] = useState(null)
   const [isSpinning, setIsSpinning] = useState(false)
 
-  const spinRoulette = () => {
+  const spinRoulette = async () => {
     if (isSpinning) return
 
     setIsSpinning(true)
     setResult(null)
 
-    const winnerIndex = Math.floor(Math.random() * items.length)
+    let winnerNumber = null;
+
+    try {
+      const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=1&max=10&count=1';
+      const response = await fetch('https://corsproxy.io/?' + encodeURIComponent(url));
+      const data = await response.json();
+      
+      winnerNumber = data[0];
+      
+      console.log("APIから取得した数値:", winnerNumber);
+
+    } catch (error) {
+      console.error("APIエラー、標準の乱数を使用します", error);
+      winnerNumber = Math.floor(Math.random() * items.length) + 1;
+    }
+
+    const winnerIndex = items.indexOf(winnerNumber);
 
     const anglePerItem = 360 / items.length
     const stopAngle = 360 - (winnerIndex * anglePerItem + anglePerItem / 2)
@@ -22,7 +38,7 @@ function App() {
     setRotation(newRotation)
 
     setTimeout(() => {
-      setResult(items[winnerIndex])
+      setResult(winnerNumber)
       setIsSpinning(false)
     }, 3000)
   }
