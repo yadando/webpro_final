@@ -16,7 +16,7 @@ function App() {
     let winnerNumber = null;
 
     try {
-      const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=1&max=10&count=1';
+      const url = `https://www.randomnumberapi.com/api/v1.0/random?min=1&max=10&count=1&t=${Date.now()}`;
       const response = await fetch('https://corsproxy.io/?' + encodeURIComponent(url));
       const data = await response.json();
       
